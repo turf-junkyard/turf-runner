@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Turfjs/turf-runner",
   "dependencies": {
+    "rimraf": "^2.2.8",
     "turf": "^1.2.1"
   }
 }
