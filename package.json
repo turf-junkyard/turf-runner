@@ -1,0 +1,22 @@
+{
+  "name": "turf-runner",
+  "version": "1.0.0",
+  "description": "turf ops runner",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Turfjs/turf-runner.git"
+  },
+  "author": "morganherlocker",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Turfjs/turf-runner/issues"
+  },
+  "homepage": "https://github.com/Turfjs/turf-runner",
+  "dependencies": {
+    "turf": "^1.2.1"
+  }
+}

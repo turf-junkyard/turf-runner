@@ -1,17 +1,15 @@
 var fs = require('fs')
 
-var files = fs.readdirSync('./')
-var dirs = []
+//read all modules from turf
+var modules = [];
+var index = fs.readFileSync(__dirname + '/node_modules/turf/index.js').toString();
+var regex = /\'[^\']*\'/; 
+index = index.split('\n');
 
-files.forEach(function(file){
-  if(file[0] != '.'){
-    filePath = './' + file
-    var stat = fs.statSync(filePath)
-
-    if(stat.isDirectory()){
-      dirs.push(file)
-    }
-  }
+index.forEach(function(line){
+	var module = regex.exec(line);
+	if(module)
+		modules.push(module[0].split('\'').join(''));
 })
+console.log(modules)
 
-console.log(dirs)
