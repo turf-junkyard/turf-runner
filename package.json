@@ -6,6 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "bin": {
+      "turf-modules-as-clones": "turf-modules-as-clones"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/Turfjs/turf-runner.git"
@@ -22,5 +25,6 @@
     "queue-async": "^1.0.7",
     "rimraf": "^2.2.8",
     "turf": "^1.2.1"
-  }
+  },
+  "devDependencies": {}
 }

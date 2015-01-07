@@ -1,0 +1,44 @@
+#!/usr/bin/env node
+
+var fs = require('fs'),
+    queue = require('queue-async'),
+    spawn = require('child_process').spawn;
+
+var p = JSON.parse(fs.readFileSync(process.cwd() + '/package.json'));
+if (p.name !== 'turf') throw new Error('must be run in turf');
+
+fs.mkdirSync('turf_modules');
+
+var q = queue(1);
+
+Object.keys(p.dependencies).filter(function(dep) {
+    return dep.indexOf('turf') === 0;
+}).forEach(function(dep) {
+    q.defer(load, dep);
+});
+
+function load(dep, callback) {
+    if (fs.existsSync(process.cwd() + '/turf_modules/' + dep)) {
+        console.log(dep + ' exists, skipping');
+        callback(null);
+    }
+    spawn('git', ['clone', 'git@github.com:Turfjs/' + dep + '.git'], {
+        cwd: process.cwd() + '/turf_modules/'
+    }).on('exit', function() {
+        spawn('npm', ['install'], {
+            cwd: process.cwd() + '/turf_modules/' + dep + '/'
+        }).on('exit', function() {
+            spawn('npm', ['link'], {
+                cwd: process.cwd() + '/turf_modules/' + dep + '/'
+            }).on('exit', function() {
+                spawn('npm', ['link', dep], {
+                    cwd: process.cwd()
+                }).on('exit', function() {
+                    callback(null);
+                    console.log('npm linked ' + dep);
+                });
+            });
+            console.log('npm installed ' + dep);
+        });
+    });
+}
