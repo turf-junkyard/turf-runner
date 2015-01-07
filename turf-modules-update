@@ -1,0 +1,5 @@
+#!/bin/sh
+
+for d in turf_modules/*; do
+    (cd $d; git pull origin master)
+done
