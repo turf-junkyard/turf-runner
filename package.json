@@ -22,6 +22,7 @@
   "homepage": "https://github.com/Turfjs/turf-runner",
   "dependencies": {
     "exec-sync": "^0.1.6",
+    "glob": "^4.3.5",
     "minimist": "^1.1.0",
     "queue-async": "^1.0.7",
     "rimraf": "^2.2.8",

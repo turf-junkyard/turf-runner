@@ -1,0 +1,28 @@
+#!/usr/bin/env node
+
+var fs = require('fs'),
+    exec = require('child_process').exec,
+    path = require('path'),
+    glob = require('glob');
+
+glob.sync('turf_modules/turf-*/package.json').forEach(function(pkg) {
+  var p = JSON.parse(fs.readFileSync(pkg));
+
+  if (!p.repository) throw new Error(pkg + ' lacks repo');
+
+  if (!p.devDependencies) p.devDependencies = {};
+  if (!p.scripts) p.scripts = {};
+
+  p.devDependencies.dox = '^0.6.1';
+  p.devDependencies.doxme = '^1.2.1';
+  p.scripts.doc = 'dox -r < index.js | doxme --readme > README.md';
+
+  fs.writeFileSync(pkg, JSON.stringify(p, null, 2));
+
+  exec('npm install && npm run doc', {
+      cwd: path.dirname(pkg)
+  }, function(err, stdout, stderr) {
+      if (err) console.error(err);
+      if (stderr) console.error(stderr);
+  });
+});
