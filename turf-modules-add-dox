@@ -14,15 +14,34 @@ glob.sync('turf_modules/turf-*/package.json').forEach(function(pkg) {
   if (!p.scripts) p.scripts = {};
 
   p.devDependencies.dox = '^0.6.1';
-  p.devDependencies.doxme = '^1.2.1';
+  p.devDependencies.doxme = '^1.3.0';
   p.scripts.doc = 'dox -r < index.js | doxme --readme > README.md';
+
+  p.repository.url = p.repository.url
+    .replace('github.com/morganherlocker', 'github.com/Turfjs')
+    .replace('github.com/turfjs', 'github.com/Turfjs');
+
+  if (p.homepage) {
+      p.homepage = p.homepage
+        .replace('github.com/morganherlocker', 'github.com/Turfjs')
+        .replace('github.com/turfjs', 'github.com/Turfjs');
+  }
+
+  if (p.bugs && p.bugs.url) {
+    p.bugs.url = p.bugs.url
+        .replace('github.com/morganherlocker', 'github.com/Turfjs')
+        .replace('github.com/turfjs', 'github.com/Turfjs');
+  }
 
   fs.writeFileSync(pkg, JSON.stringify(p, null, 2));
 
   exec('npm install && npm run doc', {
       cwd: path.dirname(pkg)
   }, function(err, stdout, stderr) {
-      if (err) console.error(err);
-      if (stderr) console.error(stderr);
+      if (err || stderr) {
+          console.log('in %s', pkg);
+          console.error(err);
+          console.error(stderr);
+      }
   });
 });
