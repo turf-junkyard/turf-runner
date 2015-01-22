@@ -9,6 +9,7 @@
   "bin": {
     "turf-modules-as-clones": "turf-modules-as-clones",
     "turf-modules-test": "turf-modules-test",
+    "turf-modules-add-dox": "turf-modules-add-dox",
     "turf-modules-harmonize-versions": "turf-modules-harmonize-versions",
     "turf-modules-update": "turf-modules-update"
   },
