@@ -8,6 +8,8 @@
   },
   "bin": {
     "turf-modules-as-clones": "turf-modules-as-clones",
+    "turf-modules-test": "turf-modules-test",
+    "turf-modules-harmonize-versions": "turf-modules-harmonize-versions",
     "turf-modules-update": "turf-modules-update"
   },
   "repository": {
