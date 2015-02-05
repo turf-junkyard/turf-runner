@@ -14,7 +14,7 @@ glob.sync('turf_modules/turf-*/package.json').forEach(function(pkg) {
   if (!p.scripts) p.scripts = {};
 
   p.devDependencies.dox = '^0.6.1';
-  p.devDependencies.doxme = '^1.3.0';
+  p.devDependencies.doxme = '^1.4.2';
   p.scripts.doc = 'dox -r < index.js | doxme --readme > README.md';
 
   p.repository.url = p.repository.url
